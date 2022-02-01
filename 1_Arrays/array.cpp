@@ -54,6 +54,7 @@ class MyArray{
             }
 
             cout << endl;
+            cout << endl;
         }
 
         //insert an element into the array
@@ -63,7 +64,11 @@ class MyArray{
             if(used_size >= total_size){
                 return -1;
             }
-            
+    
+            if(index > used_size){
+                return -1;
+            }
+
             for(i=used_size; i >= index; i--){
                 ptr[i+1] = ptr[i];
             }
@@ -95,7 +100,7 @@ class MyArray{
 
 int main(){
     int max_size, size;
-    int element, index;
+    int x, element, index;
     int status;
 
     cout << "Enter max size you want for array --> ";
@@ -115,40 +120,68 @@ int main(){
     cout << endl;
     (*arr_ptr).traversal();
 
-
-    //insertion of an element
-    cout << endl;
-    cout << "Enter element to insert --> ";
-    cin >> element;
-    
-    cout << endl;
-    cout << "Enter position(0 - " << (arr_ptr->get_used_size() - 1) << ") --> ";
-    cin >> index;
-
-    status = (*arr_ptr).insertion(element, index);
-    
-    if(status == -1){
-        cout << "Insertion failed - (size limit excedded)";
-    }
-    else{
+    while(x != -1){
+        cout << "1 - Insert element in array " << endl;
+        cout << "2 - Delete element in array " << endl;
+        cout << "3 - Print element of array " << endl;
+        cout << "-1 - EXIT" << endl;
         cout << endl;
-        (*arr_ptr).traversal();
-    }
 
+        cout << "Enter choice --> ";
+        cin >> x;
 
-    //deletion of an element
-    cout << endl;
-    cout << "Enter position to delete(0 - " << (arr_ptr->get_used_size() - 1) << ") --> ";
-    cin >> index;
-
-    status = (*arr_ptr).deletion(index);
-    
-    if(status == -1){
-        cout << "Deletion failed - (size limit excedded)";
-    }
-    else{
         cout << endl;
-        (*arr_ptr).traversal();
+        switch(x){
+            case 1:
+                //insertion of an element
+                cout << endl;
+                cout << "Enter element to insert --> ";
+                cin >> element;
+    
+                cout << endl;
+                cout << "Enter position(0 - " << (arr_ptr->get_used_size() - 1) << ") --> ";
+                cin >> index;
+
+                status = (*arr_ptr).insertion(element, index);
+    
+                if(status == -1){
+                    cout << "Insertion failed - (size limit excedded)";
+                    cout << endl;
+                    cout << endl;
+                }
+                else{
+                    cout << endl;
+                    (*arr_ptr).traversal();
+                }
+
+                break;
+            case 2:
+                //deletion of an element
+                cout << endl;
+                cout << "Enter position to delete(0 - " << (arr_ptr->get_used_size() - 1) << ") --> ";
+                cin >> index;
+
+                status = (*arr_ptr).deletion(index);
+                
+                if(status == -1){
+                    cout << "Deletion failed - (size limit excedded)";
+                    cout << endl;
+                    cout << endl;
+                }
+                else{
+                    cout << endl;
+                    (*arr_ptr).traversal();
+                }
+                break;
+
+            case 3:
+                cout << endl;
+                (*arr_ptr).traversal();
+                break;
+            
+            default:
+                break;
+        }
     }
 
     (*arr_ptr).delet_array();
