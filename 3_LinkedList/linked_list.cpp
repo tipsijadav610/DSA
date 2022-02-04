@@ -32,6 +32,13 @@ class LinkedList{
         void traversal(){
             Node* ptr;
 
+            if(head == NULL){
+                cout << "List is empty" << endl;
+                cout << endl;
+                
+                return;
+            }
+            
             ptr = head;
 
             cout << "Current elements in linked list"<< endl;
@@ -66,7 +73,7 @@ class LinkedList{
                 head = newNode;
             }
             else if(c == 'b'){
-                cout << "Enter position(1 - "<< n <<") --> ";
+                cout << "Enter position(1 - "<< n - 1<<") --> ";
                 cin >> index;
 
                 ptr = head;
@@ -141,6 +148,23 @@ class LinkedList{
 
             return;
         }
+
+        //delete linked list
+        void delete_linked_list(){
+            Node* current;
+            Node* next;
+
+            current = head;
+            while(current != NULL){
+                next = current->next;
+
+                delete current;
+
+                current = next;
+            }
+
+            head = NULL;
+        }
 };
 
 int main(){
@@ -152,7 +176,8 @@ int main(){
     while(x != -1){
         cout << "1 - Insert an element in linked list " << endl;
         cout << "2 - Delete an element of linked list " << endl;
-        cout << "3 - Print elements of linked list " << endl;
+        cout << "3 - Delete linked list " << endl;
+        cout << "4 - Print elements of linked list " << endl;
         cout << "-1 - EXIT" << endl;
         cout << endl;
 
@@ -192,6 +217,11 @@ int main(){
                 break;
 
             case 3:
+                list_ptr->delete_linked_list();
+
+                break;
+
+            case 4:
                 list_ptr->traversal();
 
                 break;
