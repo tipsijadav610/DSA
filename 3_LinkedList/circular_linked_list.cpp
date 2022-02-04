@@ -5,7 +5,6 @@ class Node{
     public:
         int data;
         Node* next;
-        
 
         Node(){
             data = 0;
@@ -23,6 +22,7 @@ class LinkedList{
         int n;
         Node* head;
      
+        //default constructor
         LinkedList(){
             n = 0;
             head = NULL;
@@ -38,14 +38,14 @@ class LinkedList{
                 
                 return;
             }
-            
+
             ptr = head;
 
             cout << "Current elements in linked list"<< endl;
-            while(ptr != NULL){
+            do{
                 cout << ptr->data << " ";
                 ptr = ptr->next;
-            }
+            }while(ptr != head);
 
             cout << endl;
             cout << endl;
@@ -63,17 +63,28 @@ class LinkedList{
             if(head == NULL){
                 head = newNode;
 
+                newNode->next = newNode;
+
                 n += 1;
 
                 return;
             }
             
             if(c == 'a'){
+                ptr = head;
+
+                do{
+                    ptr = ptr->next;
+                }while(ptr->next != head);
+
                 newNode->next = head;
+
+                ptr->next = newNode;
                 head = newNode;
+
             }
             else if(c == 'b'){
-                cout << "Enter position(1 - "<< n - 1<<") --> ";
+                cout << "Enter position(1 - "<< n - 1 <<") --> ";
                 cin >> index;
 
                 ptr = head;
@@ -86,11 +97,13 @@ class LinkedList{
             }
             else{
                 ptr = head;
-                while(ptr->next != NULL){
+
+                do{
                     ptr = ptr->next;
-                }
+                }while(ptr->next != head);
 
                 ptr->next = newNode;
+                newNode->next = head;
             }
 
             n += 1;
@@ -114,9 +127,17 @@ class LinkedList{
 
             if(c == 'a'){
                 ptr = head;
+
+                do{
+                    ptr = ptr->next;
+                }while(ptr->next != head);
+
+                temp = head;
+
+                ptr->next = head->next;
                 head = head->next;
 
-                delete ptr;
+                delete temp;
             }
             else if(c == 'b'){
                 cout << "Enter position(1 - "<< n - 2 <<") --> ";
@@ -134,12 +155,12 @@ class LinkedList{
             }
             else{
                 ptr = head;
-                while(ptr->next != NULL){
-                    temp = ptr;
+                do{
+                    temp=ptr;
                     ptr = ptr->next;
-                }
+                }while(ptr->next != head);
 
-                temp->next = NULL;
+                temp->next = head;
 
                 delete ptr;
             }
@@ -149,19 +170,19 @@ class LinkedList{
             return;
         }
 
-        //delete linked list
+        //deletion of circular linked list
         void delete_linked_list(){
             Node* current;
             Node* next;
 
             current = head;
-            while(current != NULL){
+            do{
                 next = current->next;
 
                 delete current;
 
                 current = next;
-            }
+            }while(current != head);
 
             head = NULL;
         }
@@ -170,6 +191,7 @@ class LinkedList{
 int main(){
     int x, data, index;
     char c;
+    
     LinkedList list;
     LinkedList* list_ptr = &list;
 
