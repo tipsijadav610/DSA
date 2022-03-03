@@ -104,9 +104,6 @@ class Queue{
                 front1 = rear1 - 1;
             }
 
-            cout << front1 << endl;
-            cout << rear1 << endl;
-
             ptr[rear1] = element;
 
             return;
