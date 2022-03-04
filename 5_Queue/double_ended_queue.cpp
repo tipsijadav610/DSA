@@ -56,7 +56,7 @@ class Queue{
 
         //is queue empty
          bool isEmpty(){
-            if(front1 == rear1 && front2 == rear2){
+            if(front1 == rear2 && front2 == rear1){
                 return true;
             }
             else{
