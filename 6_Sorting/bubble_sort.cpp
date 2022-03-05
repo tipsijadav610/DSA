@@ -54,16 +54,26 @@ class MyArray{
             cout << endl;
         }
 
+        //bubble sort algorithm
         void bubble_sort(){
             int i, j, temp;
+            bool swap;
 
-            for(i=0; i<used_size - 1; i++){
+            for(i=0; i<used_size - 1; i++){   
+                
+                swap = false;
                 for(j=0 ; j<used_size - i - 1 ; j++){
                     if(ptr[j] > ptr[j+1]){
                         temp = ptr[j];
                         ptr[j] = ptr[j+1];
                         ptr[j+1] = temp;
+
+                        swap = true;
                     }
+                }
+
+                if(swap == false){
+                    break;
                 }
             } 
 
