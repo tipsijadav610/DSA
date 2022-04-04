@@ -89,10 +89,51 @@ class BinaryTree{
                 return IsBST(root->right);
             }
         }
+
+        //searching in BST
+        bool searching_bst_rec(Node* root, int element){
+            if(root == NULL){
+                return false;
+            }
+            else{
+                if(root->data == element){
+                    return true;
+                }
+                else{
+                    if(element < root->data){
+                        return searching_bst_rec(root->left, element); 
+                    }
+                    else{
+                        return searching_bst_rec(root->right, element);
+                    }
+                }
+            }
+        }
+
+        bool searching_bst_iter(int element){
+            Node* temp = root;
+
+            while(temp != NULL){
+                if(temp->data == element){
+                    return true;
+                }
+                else{
+                    if(element < temp->data){
+                        temp = temp->left;
+                    }
+                    else{
+                        temp = temp->right;
+                    }
+                }
+            }
+
+            return false;
+        }
 };
 
 int main(){
-    int x;
+    int x, element;
+    char choice;
 
     BinaryTree tree;
     BinaryTree* tree_ptr = &tree;
@@ -115,6 +156,55 @@ int main(){
     tree_ptr->InOrder(e0);
     cout << endl;
     cout << endl;
+
+    while(true){
+        //To continue loop or not
+        cout << "1 - Continue " << endl;
+        cout << "-1 - Exit Loop" << endl;
+        cout << endl;
+
+        cout << "Enter choice --> ";
+        cin >> x;
+
+        if(x == -1){
+            break;
+        }        
+
+        //Entering number to search
+        cout << endl;
+        cout << "Enter number to find --> ";
+        cin >> element;
+        
+        cout << endl;
+
+        //Entering method
+        cout << "a - Recursion" << endl;
+        cout << "b - Iteration" << endl;
+        cout << endl;
+
+        cout << "Enter Method --> ";
+        cin >> choice;
+
+        cout << endl;
+        if(choice == 'a'){
+            if(tree_ptr->searching_bst_rec(e0, element)){
+                cout << "Element is found" << endl;
+            }
+            else{
+                cout << "Element is not found" << endl;
+            }
+        }
+        else{
+            if(tree_ptr->searching_bst_iter(element)){
+                cout << "Element is found" << endl;
+            }
+            else{
+                cout << "Element is not found" << endl;
+            }            
+        }
+
+        cout << endl;
+    }   
 
     delete e0;
     delete e1;
